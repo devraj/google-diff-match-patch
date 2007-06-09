@@ -16,21 +16,21 @@ The first step is to create a new `diff_match_patch` object.  This object contai
 
     Despite the large number of optimisations used in this function, diff can take a while to compute. The `diff_match_patch.Diff_Timeout` property is available to set how many seconds any diff's exploration phase may take. The default value is 1.0. A value of 0 disables the timeout and lets diff run until completion. Should diff timeout, the return value will still be a valid difference, though probably non-optimal.
 
-===diff_cleanupSemantic(diffs) => null===
+*diff_cleanupSemantic(diffs) => null===
 
     A diff of two unrelated texts can be filled with coincidental matches. For example, the diff of "mouse" and "sofas" is [(-1, "m"), (1, "s"), (0, "o"), (-1, "u"), (1, "fa"), (0, "s"), (-1, "e")]. While this is the optimum diff, it is difficult for humans to understand. Semantic cleanup rewrites the diff, expanding it into a more intelligible format. The above example would become: [(-1, "mouse"), (1, "sofas")]. If a diff is to be human-readable, it should be passed to `diff_cleanupSemantic`.
 
-===diff_cleanupEfficiency(diffs) => null===
+*diff_cleanupEfficiency(diffs) => null*
 
     This function is similar to diff_cleanupSemantic, except that instead of optimising a diff to be human-readable, it optimises the diff to be efficient for machine processing. The results of both cleanup types are often the same.
 
     The efficiency cleanup is based on the observation that a diff made up of large numbers of small diffs edits may take longer to process (in downstream applications) or take more capacity to store or transmit than a smaller number of larger diffs. The `diff_match_patch.Diff_EditCost` property sets what the cost of handling a new edit is in terms of handling extra characters in an existing edit. The default value is 4, which means if expanding the length of a diff by three characters can eliminate one edit, then that optimisation will reduce the total costs.
 
-===diff_prettyHtml(diffs) => html===
+*diff_prettyHtml(diffs) => html*
 
     Takes a diff array and returns a pretty html sequence.
 
-===match_main(text, pattern, loc) => location===
+*match_main(text, pattern, loc) => location*
 
     Given a text to search, a pattern to search for and an expected location in the text near which to find the pattern, return the location which matches closest. The function will search for the best match based on both the number of character errors between the pattern and the potential match, as well as the distance between the expected location and the potential match.
 
@@ -40,18 +40,18 @@ The first step is to create a new `diff_match_patch` object.  This object contai
 
     Another global variable is MATCH_THRESHOLD which determines the cut-off value for a valid match. If MATCH_THRESHOLD is closer to 0, the requirements for accuracy increase. If MATCH_THRESHOLD is closer to 1 then it is more likely that a match will be found. This variable defaults to 0.5. If no match is found, the function returns null (JavaScript) or None (Python).
 
-===patch_make(text1, text2[, diffs]) => patches===
+*patch_make(text1, text2[, diffs]) => patches*
 
     Given two texts, compute the differences between them and return an array of patch objects. In the event that the list of differences has already been computed, it may be passed as a third argument to avoid extra work.
 
-===patch_totext(patches) => text===
+*patch_toText(patches) => text*
 
     Reduces an array of patch objects to a block of text which looks extremely similar to the standard GNU diff/patch format. This text may be stored or transmitted.
 
-===patch_fromtext(text) => patches===
+*patch_fromText(text) => patches*
 
     Parses a block of text (which was presumably created by the patch_totext function) and returns an array of patch objects.
 
-===patch_apply(patches, text1) => [text2, results]===
+*patch_apply(patches, text1) => [text2, results]*
 
     Applies a list of patches to text1. The first element of the return value is the newly patched text. The second element is an array of true/false values indicating which of the patches were successfully applied.
