@@ -1,0 +1,58 @@
+#summary API for Diff, Match and Patch Library.
+
+===Introduction===
+
+This library is available in multiple languages.  Regardless of the language used, the interface for using it is the same.  This page describes the API for the public functions.  For further examples, download the relevant test harness.
+
+===Initialization===
+
+The first step is to create a new `diff_match_patch` object.  This object contains various properties which set the behaviour of the algorithms, as well as the following methods/functions.
+
+===diff_main(text1, text2) => diffs===
+
+    An array of differences is computed which describe the transformation of text1 into text2. Each difference is a two-element array (JavaScript) or tuple (Python). The first element specifies if it is an insertion (1), a deletion (-1) or an equality (0). The second element specifies the affected text.
+
+    diff_main("Good dog", "Bad dog") => [(-1, "Goo"), (1, "Ba"), (0, "d dog")]
+
+    Despite the large number of optimisations used in this function, diff can take a while to compute. The global variable DIFF_TIMEOUT is available to set how many seconds any diff's exploration phase may take. The default value is 1.0. A value of 0 disables the timeout and lets diff run until completion. Should diff timeout, the return value will still be a valid difference, though probably non-optimal.
+
+===diff_cleanup_semantic(diffs) => null===
+
+    A diff of two unrelated texts can be filled with coincidental matches. For example, the diff of "mouse" and "sofas" is [(-1, "m"), (1, "s"), (0, "o"), (-1, "u"), (1, "fa"), (0, "s"), (-1, "e")]. While this is the optimum diff, it is difficult for humans to understand. Semantic cleanup rewrites the diff, expanding it into a more intelligible format. The above example would become: [(-1, "mouse"), (1, "sofas")]. If a diff is to be human-readable, it should be passed to diff_cleanup_semantic.
+
+===diff_cleanup_efficiency(diffs) => null===
+
+    This function is similar to diff_cleanup_semantic, except that instead of optimising a diff to be human-readable, it optimises the diff to be efficient for machine processing. The results of both cleanup types are often the same.
+
+    The efficiency cleanup is based on the observation that a diff made up of large numbers of small diffs edits may take longer to process (in downstream applications) or take more capacity to store or transmit than a smaller number of larger diffs. The global variable DIFF_EDIT_COST sets what the cost of handling a new edit is in terms of handling extra characters in an existing edit. The default value is 4, which means if expanding the length of a diff by three characters can eliminate one edit, then that optimisation will reduce the total costs.
+
+===diff_prettyhtml(diffs) => html===
+
+    Takes a diff array and returns a pretty html sequence which renders like this:
+    AppleBananas are also fruit.
+
+===match_main(text, pattern, loc) => location===
+
+    Given a text to search, a pattern to search for and an expected location in the text near which to find the pattern, return the location which matches closest. The function will search for the best match based on both the number of character errors between the pattern and the potential match, as well as the distance between the expected location and the potential match.
+
+    The following example is a classic dilemma. There are two potential matches, one is close to the expected location but contains a one character error, the other is far from the expected location but is exactly the pattern sought after:
+    match_main("abc12345678901234567890abbc", "abc", 26)
+    Which result is returned (0 or 24) is determined by the global variable MATCH_BALANCE. If MATCH_BALANCE is closer to 0, accuracy of the characters is more important. If MATCH_BALANCE is closer to 1, accuracy of the location is more important. This variable defaults to 0.5.
+
+    Another global variable is MATCH_THRESHOLD which determines the cut-off value for a valid match. If MATCH_THRESHOLD is closer to 0, the requirements for accuracy increase. If MATCH_THRESHOLD is closer to 1 then it is more likely that a match will be found. This variable defaults to 0.5. If no match is found, the function returns null (JavaScript) or None (Python).
+
+===patch_make(text1, text2[, diffs]) => patches===
+
+    Given two texts, compute the differences between them and return an array of patch objects. In the event that the list of differences has already been computed, it may be passed as a third argument to avoid extra work.
+
+===patch_totext(patches) => text===
+
+    Reduces an array of patch objects to a block of text which looks extremely similar to the standard GNU diff/patch format. This text may be stored or transmitted.
+
+===patch_fromtext(text) => patches===
+
+    Parses a block of text (which was presumably created by the patch_totext function) and returns an array of patch objects.
+
+===patch_apply(patches, text1) => [text2, results]===
+
+    Applies a list of patches to text1. The first element of the return value is the newly patched text. The second element is an array of true/false values indicating which of the patches were successfully applied.
