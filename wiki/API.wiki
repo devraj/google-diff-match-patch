@@ -41,8 +41,9 @@
     Another property is `diff_match_patch.Match_Threshold` which determines the cut-off value for a valid match. If Match_Threshold is closer to 0, the requirements for accuracy increase. If Match_Threshold is closer to 1 then it is more likely that a match will be found. This variable defaults to 0.5. If no match is found, the function returns null (Java/JavaScript) or None (Python).
 
 *patch_make(text1, text2[, diffs]) => patches*
+*patch_make(diffs) => patches*
 
-    Given two texts, compute the differences between them and return an array of patch objects. In the event that the list of differences has already been computed, it may be passed as a third argument to avoid extra work.
+    Given two texts, compute the differences between them and return an array of patch objects. In the event that the list of differences has already been computed, it may be passed as a third argument to avoid extra work.  Alternatively, one can pass just the list of differences, if the two texts are not available.
 
 *patch_toText(patches) => text*
 
