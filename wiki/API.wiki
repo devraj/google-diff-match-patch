@@ -52,7 +52,7 @@
 
 *patch_fromText(text) => patches*
 
-    Parses a block of text (which was presumably created by the patch_totext function) and returns an array of patch objects.
+    Parses a block of text (which was presumably created by the patch_toText function) and returns an array of patch objects.
 
 *patch_apply(patches, text1) => [text2, results]*
 
