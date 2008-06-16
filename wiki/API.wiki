@@ -1,4 +1,5 @@
 #summary API for Diff, Match and Patch Library.
+#labels Phase-Implementation
 
 *Introduction*
 
@@ -10,7 +11,7 @@
 
 *diff_main(text1, text2) => diffs*
 
-    An array of differences is computed which describe the transformation of text1 into text2. Each difference is a two-element array (JavaScript) or tuple (Python) or linked list of Diff objects (Java). The first element specifies if it is an insertion (1), a deletion (-1) or an equality (0). The second element specifies the affected text.
+    An array of differences is computed which describe the transformation of text1 into text2. Each difference is a two-element array (JavaScript) or tuple (Python) or linked list of Diff objects (C++, Java). The first element specifies if it is an insertion (1), a deletion (-1) or an equality (0). The second element specifies the affected text.
 
     `diff_main("Good dog", "Bad dog") => [(-1, "Goo"), (1, "Ba"), (0, "d dog")]`
 
@@ -28,7 +29,7 @@
 
 *diff_prettyHtml(diffs) => html*
 
-    Takes a diff array and returns a pretty html sequence.
+    Takes a diff array and returns a pretty HTML sequence.
 
 *match_main(text, pattern, loc) => location*
 
