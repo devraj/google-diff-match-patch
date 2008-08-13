@@ -3,7 +3,7 @@
 
 *Introduction*
 
-    This library is available in multiple languages.  Regardless of the language used, the interface for using it is the same.  This page describes the API for the public functions.  For further examples, download the relevant test harness.
+    This library is available in multiple languages.  Regardless of the language used, the interface for using it is the same.  This page describes the API for the public functions.  For further examples, see the relevant test harness.
 
 *Initialization*
 
@@ -11,7 +11,7 @@
 
 *diff_main(text1, text2) => diffs*
 
-    An array of differences is computed which describe the transformation of text1 into text2. Each difference is a two-element array (JavaScript) or tuple (Python) or linked list of Diff objects (C++, Java). The first element specifies if it is an insertion (1), a deletion (-1) or an equality (0). The second element specifies the affected text.
+    An array of differences is computed which describe the transformation of text1 into text2. Each difference is an array (JavaScript) or tuple (Python) or linked list of Diff objects (C++, Java) of two-elements. The first element specifies if it is an insertion (1), a deletion (-1) or an equality (0). The second element specifies the affected text.
 
     `diff_main("Good dog", "Bad dog") => [(-1, "Goo"), (1, "Ba"), (0, "d dog")]`
 
