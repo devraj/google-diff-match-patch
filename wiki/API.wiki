@@ -47,7 +47,7 @@
 
 *patch_make(text1, diffs) => patches*
 
-    Given two texts, compute the differences between them and return an array of patch objects. In the event that the list of differences has already been computed, it may be passed as a third argument to avoid extra work.  Alternatively, one can pass just the list of differences, if the two texts are not available.
+    Given two texts, or an already computed list of differences, return an array of patch objects.  The third form (text1, diffs) is preferred, use it if you happen to have that data available, otherwise this function will compute the missing pieces.
 
 *patch_toText(patches) => text*
 
