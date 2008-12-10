@@ -11,7 +11,7 @@ Text 1: `There are two things that are more difficult than making an after-dinne
 
 Text 2: ````Churchill````` talked about climbing a wall which is leaning toward you and kissing a woman who is leaning away from you.`
 
-This example contains two relatively well-separated edits.  The result using this library are two patches:
+This example contains two relatively well-separated edits.  Using this library will result in the following two patches:
 
 {{{
 @@ -1,84 +1,28 @@
