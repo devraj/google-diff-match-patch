@@ -29,7 +29,7 @@
 
 *diff_levenshtein(diffs) => int*
 
-    Given a diff, measure its [http://en.wikipedia.org/wiki/Levenshtein_distance Levenshtein distance] in terms of the number of inserted, deleted or substituted characters.
+    Given a diff, measure its [http://en.wikipedia.org/wiki/Levenshtein_distance Levenshtein distance] in terms of the number of inserted, deleted or substituted characters.  The minimum distance is 0 which means equality, the maximum distance is the length of the longer string.
 
 *diff_prettyHtml(diffs) => html*
 
