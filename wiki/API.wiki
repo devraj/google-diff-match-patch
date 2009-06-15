@@ -11,7 +11,7 @@
 
 *diff_main(text1, text2) => diffs*
 
-    An array of differences is computed which describe the transformation of text1 into text2. Each difference is an array (JavaScript) or tuple (Python) or linked list of Diff objects (C++, Java) of two-elements. The first element specifies if it is an insertion (1), a deletion (-1) or an equality (0). The second element specifies the affected text.
+    An array of differences is computed which describe the transformation of text1 into text2. Each difference is an array (JavaScript) or tuple (Python) or Diff object (C++, C#, Java). The first element specifies if it is an insertion (1), a deletion (-1) or an equality (0). The second element specifies the affected text.
 
     `diff_main("Good dog", "Bad dog") => [(-1, "Goo"), (1, "Ba"), (0, "d dog")]`
 
@@ -43,7 +43,7 @@
     `match_main("abc12345678901234567890abbc", "abc", 26)`
     Which result is returned (0 or 24) is determined by the `diff_match_patch.Match_Balance` property. If Match_Balance is closer to 0, accuracy of the characters is more important. If Match_Balance is closer to 1, accuracy of the location is more important. This variable defaults to 0.5.
 
-    Another property is `diff_match_patch.Match_Threshold` which determines the cut-off value for a valid match. If Match_Threshold is closer to 0, the requirements for accuracy increase. If Match_Threshold is closer to 1 then it is more likely that a match will be found. This variable defaults to 0.5. If no match is found, the function returns null (Java/JavaScript) or None (Python).
+    Another property is `diff_match_patch.Match_Threshold` which determines the cut-off value for a valid match. If Match_Threshold is closer to 0, the requirements for accuracy increase. If Match_Threshold is closer to 1 then it is more likely that a match will be found. This variable defaults to 0.5. If no match is found, the function returns -1.
 
 *patch_make(text1, text2) => patches*
 
