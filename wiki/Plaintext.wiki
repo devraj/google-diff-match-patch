@@ -3,7 +3,7 @@
 
 = Plain Text vs. Structured Content =
 
-The diff, match and patch algorithms in this library are *plain text only*.  Attempting to feed HTML, XML or some other structured content through them may result in problems.  Consider the case where a series of patches are applied to HTML content on a best-effort basis.  One could be left with a <B> tag that starts but doesn't end, text falling between a </TD> and a <TD>, or a syntactically invalid tag missing a bracket.
+The diff, match and patch algorithms in this library are *plain text only*.  Attempting to feed HTML, XML or some other structured content through them may result in problems.  Consider the case where a series of patches are applied to HTML content on a best-effort basis.  One could be left with a &lt;B> tag that starts but doesn't end, text falling between a &lt;/TD> and a &lt;TD>, or a syntactically invalid tag missing a bracket.
 
 The correct solution is to use a tree-based diff, match and patch.  These employ totally different algorithms.  I'm afraid I can't help you there.
 
