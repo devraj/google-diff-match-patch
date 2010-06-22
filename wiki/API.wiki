@@ -33,7 +33,7 @@
 
 *diff_prettyHtml(diffs) => html*
 
-    Takes a diff array and returns a pretty HTML sequence.  This function is mainly intended as an example from which to write custom own display functions.
+    Takes a diff array and returns a pretty HTML sequence.  This function is mainly intended as an example from which to write ones own display functions.
 
 *match_main(text, pattern, loc) => location*
 
